@@ -31,7 +31,7 @@ class ChatFragment: Fragment() {
         viewModel.currentChat.addSnapshotListener { value, error ->
             if (error == null && value != null) {
                 val chat = value.toObject(Chat::class.java)
-                binding.rvChatMessages.adapter = ChatAdapter(chat!!.messages, viewModel.currentUserId)
+                binding.rvChatMessages.adapter = chat?.messages?.let { ChatAdapter(it, viewModel.currentUserId) }
             }
         }
 
